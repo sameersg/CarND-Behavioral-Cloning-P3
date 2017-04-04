@@ -18,7 +18,7 @@ for line in lines:
     #print(filename)
     current_path = 'data_org/IMG/' + filename
     #print(current_path)
-    image = cv2.imread(current_path)
+    image = cv2.imraead(current_path)
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
@@ -34,6 +34,6 @@ model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
 model.add(Flatten())
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=10)
+model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=4)
 
 model.save('model.h5')
