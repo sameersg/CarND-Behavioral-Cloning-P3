@@ -3,14 +3,14 @@ import cv2
 import numpy as np
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda
+from keras.layers import Flatten, Dense, Lambda, Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
 
 lines = []
 
-with open('data/driving_log.csv') as csvfile:
+with open('data_org/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -22,7 +22,7 @@ for line in lines:
     source_path = line[0]
     filename = source_path.split('/')[-1]
     #print(filename)
-    current_path = 'data/IMG/' + filename
+    current_path = 'data_org/IMG/' + filename
     #print(current_path)
     image = cv2.imread(current_path)
     images.append(image)
@@ -43,6 +43,7 @@ y_train = np.array(augumented_measurements)
 
 model = Sequential()
 model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((70,25),(0,0))))
 model.add(Convolution2D(6,5,5,activation="relu"))
 model.add(MaxPooling2D())
 model.add(Convolution2D(6,5,5,activation="relu"))
