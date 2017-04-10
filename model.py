@@ -13,7 +13,7 @@ from keras.layers.pooling import MaxPooling2D
 
 lines = []
 
-with open('data/driving_log.csv') as csvfile:
+with open('../data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -27,7 +27,7 @@ for line in lines:
         source_path = line[i]
         filename = source_path.split('/')[-1]
         #print(filename)
-        current_path = 'data/IMG/' + filename
+        current_path = '../data/IMG/' + filename
         #print(current_path)
         #image = cv2.imread(current_path)
         image = cv2.imread(current_path)[:,:,::-1]  # Read image and convert from BGR to RGB
