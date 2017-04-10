@@ -30,6 +30,9 @@ for line in lines:
         current_path = 'data/IMG/' + filename
         #print(current_path)
         #image = cv2.imread(current_path)
+        # Read image and convert from BGR to RGB 
+        #The data has 3 dimensions: width, height, and color. ::-1 effectively reverses the order of the colors.
+        #The width and height are not affected
         image = cv2.imread(current_path)[:,:,::-1]  # Read image and convert from BGR to RGB
         images.append(image)
 
