@@ -22,6 +22,10 @@ images = []
 measurements = []
 correction = 0.2
 
+
+
+#Using all three Kameras
+
 for line in lines:
     for i in range(3):
         source_path = line[i]
@@ -46,6 +50,9 @@ for line in lines:
 
 augumented_images, augumented_measurements = [], []
 
+
+#FLipped Images
+
 for image, measuerement in zip(images, measurements):
     augumented_images.append(image)
     augumented_measurements.append(measuerement)
@@ -56,6 +63,9 @@ for image, measuerement in zip(images, measurements):
 X_train = np.array(augumented_images)
 y_train = np.array(augumented_measurements)
 
+
+
+#Nvidia Network
 
 model = Sequential()
 
