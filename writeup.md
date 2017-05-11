@@ -13,6 +13,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/center_2017_04_06_22_01_09_367.jpg "Center Driving"
+[image2]: ./examples/epochs.png "Epochs"
 [image3]: ./examples/center_2017_04_06_22_02_25_168.jpg "Recovery Image"
 [image4]: ./examples/center_2017_04_06_22_02_25_491.jpg "Recovery Image"
 [image5]: ./examples/center_2017_04_06_22_02_25_628.jpg "Recovery Image"
@@ -52,12 +53,16 @@ My model is based on the NVIDIA Architecture its consists of 5 convolution layer
 
 The data is normalized in the model using a Keras lambda layer and cropping the images. (code line 70-71). 
 
+I also added a Dropout layer with (0.1) to prevent overfitting
+
 ####2. Attempts to reduce overfitting in the model
 
 I had a Dropout layer, but the model was not overfitting with the Nvidia model and thats why i removed the dropout layer. 
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 29-64). The Dataset contains serveral normal and reverse driving and also normal driving in Track 2.
 The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+
+I added the Dropout layer back because it's a requeirement my model was also working without it. 
 
 ####3. Model parameter tuning
 
@@ -83,8 +88,14 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ####2. Final Model Architecture
 
-The final model architecture (model.py lines 68-82) is the Nvidia Model. 
+The final model architecture (model.py lines 68-82) is the Nvidia Model.
+https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/
+ 
+I tried to visualizie the Model with keras and was getting erros. Was not able to fix it.
+ImportError: No module named 'keras.utils.dot_utils'
+Failed to import pydot. You must install pydot and graphviz for `pydotprint` to work.
 
+After installing pydot and graphviz still not working for me.
 
 ####3. Creation of the Training Set & Training Process
 
@@ -103,7 +114,13 @@ Then I repeated this process on track two in order to get more data points.
 
 To augment the data sat, I also flipped images and angles thinking that this would give it a more generalized data set. And i also cropped the images so that it can focus on the neccessary parts of the image.
 
-After the collection process i randomlly shuffled the data, i had 55617 training samples and 13905 validation samples.
+After the collection process i randomlly shuffled the data, i had 55614 training samples and 13908 validation samples.
 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 5. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 10.
+I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+![alt text][image2]
+
+
+
